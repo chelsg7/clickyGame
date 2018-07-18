@@ -7,7 +7,7 @@ import "./bootstrapTheme.css";
 import images from "./images.json";
 
 class ClickyGame extends Component {
-  //state comes here
+
   state = {
     images,
     imageClickedId: [],
@@ -18,27 +18,24 @@ class ClickyGame extends Component {
 
   handleImageChange = id => {
     var imageClickedId = this.state.imageClickedId;
-    // check to see if it's first time or not
     if (!imageClickedId.includes(id)) {
       imageClickedId.push(id)
-      // if all images in json displayed
       if (imageClickedId.length === 12) {
         this.setState({ score: 12, totalScore: 12, imageClickedId: [] });
         return;
       }
-      // if it's a winner
+      // win
       if (this.state.score >= this.state.totalScore) {
         this.state.topScore = this.state.score + 1;
       }
+
       this.setState({ images, imageClickedId, score: imageClickedId.length, totalScore: this.state.topScore });
-      // random generating image for all images
+      // random function
       for (var i = images.length - 1; i > 0; i--) {
         var j = Math.floor((Math.random() * (i)) + 0);
         [images[j], images[i]] = [images[i], images[j]];
       }
-
     } else {
-      //lost game over
       if (this.state.score < this.state.totalScore) {
         this.state.topScore = this.state.totalScore;
       }
@@ -49,18 +46,21 @@ class ClickyGame extends Component {
 
   render() {
     return (
-      <div className="App bg-secondary">
+      <div className="App bg-dark">
 
-        <header className="App-header mx-auto text-center bg-info py-3 fixed-top mb-5 ">
-          <h1 className="App-logo text-light">
-            Click Memory Game
+        <header className="App-header mx-auto text-center py-3 mb-1 ">
+          <h1 className="App-logo text-info h1">
+            Clicky Dog Memory Game
           </h1>
-          <p className="App-title h4 lead">
-            Click an image to begin!
-          </p>
-          <h1 className = "h6 lead">
+          <h2 className="App-title h2 text-success">
+            Click an image to begin taking score.
+          </h2>
+          <h4 className = "h4 text-danger">
+            If you click the same image more than once, the score will reset.
+          </h4>
+          <h3 className = "h3 text-warning">
             Score: {this.state.score} <span> | </span> Top Score: {this.state.totalScore}
-          </h1>
+          </h3>
         </header>
 
         <Wrapper>
@@ -72,11 +72,6 @@ class ClickyGame extends Component {
             />
           ))}
         </Wrapper>
-        <div className = "sticky-bottom text-center mx-auto bg-success py-3">
-          <p className = "lead text-dark">
-            Click on an image to earn points, but don't click on any more than once!
-          </p>
-        </div>
       </div>
     );
   }

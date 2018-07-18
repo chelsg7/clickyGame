@@ -1,6 +1,6 @@
 import React from "react";
 import "./Wrapper.css";
 
-const Wrapper = props => <div className="wrapper container mx-auto py-5 mt-5">{props.children}</div>;
+const Wrapper = props => <div className="container mx-auto py-3 mt-1 wrapper">{props.children}</div>;
 
 export default Wrapper;
