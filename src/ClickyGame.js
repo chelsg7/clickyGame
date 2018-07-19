@@ -20,8 +20,8 @@ class ClickyGame extends Component {
     var imageClickedId = this.state.imageClickedId;
     if (!imageClickedId.includes(id)) {
       imageClickedId.push(id)
-      if (imageClickedId.length === 12) {
-        this.setState({ score: 12, totalScore: 12, imageClickedId: [] });
+      if (imageClickedId.length === 15) {
+        this.setState({ score: 15, totalScore: 15, imageClickedId: [] });
         return;
       }
       // win
